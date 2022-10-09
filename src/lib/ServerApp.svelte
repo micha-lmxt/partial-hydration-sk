@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {Pages} from './pages';
+    import {Pages,Lazys} from './pages';
     import {setContext,getContext} from 'svelte'
     import {hydrateContext} from './context';
     export let tag,id,page,props={},starts=[];
@@ -8,7 +8,7 @@
     if (otherContext && Array.isArray(otherContext)){
         throw new Error("Try to launch nested PartialApp: " + id);
     }
-    setContext(hydrateContext, starts);
+    setContext(hydrateContext, starts.concat(Lazys));
 </script>
 
 <svelte:element this={tag} {id} >

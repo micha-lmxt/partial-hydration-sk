@@ -41,7 +41,6 @@ function create_fragment(ctx:any[]) {
                     }
                 }
             }
-            
 			tag_1 = claim_element(nodes, _tag.toUpperCase(),{id:true});
             
             if (default_slot) default_slot.c();

@@ -59,8 +59,24 @@ Component and is wrapped into the 'Hydrate' component.
 ...
 ```
 
-In addition, you need to tell the 'PartialApp' component, that you intend to hydrate your Component:
+In addition, you need to tell the 'PartialApp' component, that you intend to hydrate your Component. There are two ways to do this:
 
+#### 1. +page.js
+
+Register the component via the 'setDynamicComponents' function, eg. in 'load':
+
+```js
+import {setDynamicComponents} from 'partial-hydration-sk'
+    import YourHydratableComponent from '.../YourHydratableComponent.svelte'
+export async function load(){
+    setDynamicComponents([YourHydratableComponent])
+}
+```
+'setDynamicComponents' accepts an array of SvelteComponents and functions, see lazy loading below.
+
+#### 2. Props
+
+The 'PartialApp' component accepts a prop 'start':
 ```svelte
 <script lang="ts">
     import {PartialApp} from 'partial-hydration-sk';
@@ -68,6 +84,23 @@ In addition, you need to tell the 'PartialApp' component, that you intend to hyd
 </script>
 <PartialApp tag="div" id="appstart" page="YourStaticComponent" starts={[YourHydratableComponent]}/>
 ```
+
+### Lazy Loading
+
+You can delay the download of code and hydration. To do that, the array argument of the function 'setDynamicComponents' also accepts functions, which return a Promise<SvelteComponent>:
+
+```javascript
+import { setDynamicComponents } from 'partial-hydration-sk/pages';
+
+export async function load(){
+    setDynamicComponents(
+        [
+            async () => (await import('../LazyLoadedComponent.svelte')).default
+        ])
+}
+```
+
+
 
 ## Example
 

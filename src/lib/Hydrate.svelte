@@ -8,7 +8,9 @@
     export let tag="x",
         props=undefined,
         component=undefined,
-        slotTag="x";
+        slotTag="x",
+        key="",
+        trigger="" as ""|"observer"|"custom";
     const comps : any[] = getContext(hydrateContext);
     // check if this is child of a PartialApp component
     const noHydration = !comps || comps==="nested";
@@ -18,9 +20,18 @@
         index = comps.findIndex(v=>v===component);
     }
     let slotid=$$slots.default?crypto.randomUUID():undefined
+    const trig = (!trigger || trigger==="observer") ? undefined :
+        "0"
 </script>
 
-<svelte:element this={tag} data-hydrate-start={noHydration?undefined:index} data-has-slot={slotid} data-props={props && !noHydration?JSON.stringify(props):undefined}>
+<svelte:element
+this={tag} 
+data-hydrate-start={noHydration?undefined:index} 
+data-has-slot={slotid} 
+data-props={props && !noHydration?JSON.stringify(props):undefined}
+data-key={key?key:undefined}
+data-trigger={trig}
+>
     <svelte:component this={component} {...props||{}}>
     {#if $$slots.default}
     <StaticSlot tag={slotTag} context={comps} id={slotid}>

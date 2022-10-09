@@ -5,7 +5,7 @@ export {default as PartialApp} from './partialApp';
 
 export {default as Hydrate} from './Hydrate.svelte';
 export {hydrate} from './hydrate'
-export {addPage} from './pages';
+export {addPage, setDynamicComponents} from './pages';
 
 // some helper components
 /**

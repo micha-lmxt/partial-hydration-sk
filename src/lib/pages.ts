@@ -1,4 +1,5 @@
-import type { SvelteComponent, SvelteComponentDev } from "svelte/internal";
+import { SvelteComponent, SvelteComponentDev,  } from "svelte/internal";
+import { browser } from "$app/environment";
 
 export let Pages: { [key: string]: any } = {};
 
@@ -11,8 +12,19 @@ export function addPage<T extends typeof SvelteComponent| typeof SvelteComponent
         Pages[a.name] = a.page;
     }
 }
+export let Lazys : any[] =  []
 
-let memo = {url:"-1",html:Promise.resolve(undefined) as Promise<Document|undefined>,p:undefined as DOMParser|undefined}
+export async function setDynamicComponents(components:((typeof SvelteComponent)|(typeof SvelteComponentDev)| (()=>Promise<(typeof SvelteComponent)|(typeof SvelteComponentDev)>))[]) {
+    if (browser) {
+        Lazys = components;
+    } else {
+        Lazys = await Promise.all(components.map(v=>("$$render" in v)?v: v()))
+    }
+}
+
+let memo = {
+    url:"-1",
+    html:Promise.resolve(undefined) as Promise<Document|undefined>,p:undefined as DOMParser|undefined}
 export function fetchHTML(url:string){
     if (memo.url === url){
         return memo.html;
