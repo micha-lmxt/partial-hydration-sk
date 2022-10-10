@@ -85,6 +85,34 @@ The 'PartialApp' component accepts a prop 'start':
 <PartialApp tag="div" id="appstart" page="YourStaticComponent" starts={[YourHydratableComponent]}/>
 ```
 
+### Advanced Props Handling
+
+You can only pass serializable (JSON.stringify) into the prop 'props' to the 'Hydrate' component. If you need more complex props, eg. if you want to put a function as prop, you can retrieve a store to the props from the 'PartialApp' component. Pass a unique key to the Hydrate component, so that you can retrieve the props: 
+
+```svelte
+<!-- +page.js -->
+<script>
+    import {PartialApp} from 'partial-hydration-sk'
+
+    let hydrated,
+        hydratedChildProps
+    $: if (hydrated){
+        const hydratedChild = hydrated.find(v=>v.key==="mykey");
+        if (hydratedChild){
+            hydratedChildProps = hydratedChild.props;
+            hydratedChildProps.update(v=>({...v,someFunctionProp:()=>{...}}))
+        }
+    }
+</script>
+...
+```
+
+```svelte
+<!-- SomeStatic.svelte -->
+...
+<Hydrate key="mykey" ...>
+```
+
 ### Lazy Loading
 
 You can delay the download of code and hydration. To do that, the array argument of the function 'setDynamicComponents' also accepts functions, which return a Promise<SvelteComponent>:
@@ -100,7 +128,7 @@ export async function load(){
 }
 ```
 
-
+In the static component, you can import the component directly.
 
 ## Example
 

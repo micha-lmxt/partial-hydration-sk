@@ -21,7 +21,7 @@
     }
     let slotid=$$slots.default?crypto.randomUUID():undefined
     const trig = (!trigger || trigger==="observer") ? undefined :
-        "0"
+        "1"
 </script>
 
 <svelte:element
