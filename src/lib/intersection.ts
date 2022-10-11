@@ -7,7 +7,6 @@ export const intersect = (els: Element[], cb: (el: Element) => void) => {
 
     let observer = new IntersectionObserver(
         (entries) => {
-            console.log(entries)
             entries.forEach(
                 v => {
                     if (v.isIntersecting){

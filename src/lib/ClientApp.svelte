@@ -45,7 +45,7 @@
             htmlLoaded.then(v=>{
                 const toHydrate = findHydrationTags(root);
                 const allFound = toHydrate.map(v => ({ component: v.componentID<starts.length?starts[v.componentID]:Lazys[v.componentID]
-                    , props: writable(v.props), el: v.el,slotId:v.slotId, key: v.key }))
+                    , props: writable(v.props), el: v.el,slotId:v.slotId, key: v.key ,trigger: v.trigger}))
                 // TODO: make this better    
                 const checkIsSvelte = (v)=>v.prototype && ("constructor" in v.prototype);
                 
@@ -61,6 +61,7 @@
                 )
                 childList = allFound.filter( v=> checkIsSvelte(v.component));
                 lazys = allFound.filter( v=> !checkIsSvelte(v.component));
+                
                 intersect(lazys.filter(v=>v.trigger!=="1").map(v=>v.el),loadLazy)
             })
         }
