@@ -82,7 +82,7 @@
             {#if Child.slotId}
                 <Target Component={Child.component}
                 props={Child.props}>  
-                    <svelte:self id={Child.slotId} {starts}/> 
+                    <svelte:self id={Child.slotId} {starts} bind:hydrated={Child.hydrated}/> 
                 </Target>
             {:else}
                 <Target Component={Child.component}

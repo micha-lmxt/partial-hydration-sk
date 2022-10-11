@@ -105,6 +105,8 @@ You can only pass serializable (JSON.stringify) into the prop 'props' to the 'Hy
     }
 </script>
 ...
+    <PartialApp bind:hydrated>
+...
 ```
 
 ```svelte
@@ -128,7 +130,49 @@ export async function load(){
 }
 ```
 
-In the static component, you can import the component directly.
+In the static component, you can import the component directly:
+
+```svelte
+<!--inside YourStaticComponent.svelte-->
+<script>
+    import LazyLoadedComponent from '.../LazyLoadedComponent.svelte'
+    import {Hydrate} from 'partial-hydration-sk';
+</script>
+
+...
+    <Hydrate component={LazyLoadedComponent} trigger="observer" key="mylazy">
+        <SomeMoreStaticCode>
+    </Hydrate>
+...
+```
+
+If you omit the trigger prop or set it to "observer", the import and hydration is triggered by an intersection observer. Once the surrounding element is visible, it is hydrated. 
+
+#### Custom Trigger
+
+Alternatively, you can set the 'trigger' prop to '"custom"'. Then you should also pass a unique key and retrieve a trigger function from the 'PartialApp' component. You can also retrieve a reference to the surrounding element, so that you can attach listeners to it.
+
+```svelte
+<!-- +page.js -->
+<script>
+    import {PartialApp} from 'partial-hydration-sk'
+
+    let hydrated,
+        hydratedChildProps
+        first = true;
+    $: if (hydrated){
+        const hydratedChild = hydrated.find(v=>v.key==="mykey");
+        if (first && hydratedChild){
+            first = false;
+            hydratedChild.element.onclick = hydratedChild.element.trigger;
+        }
+    }
+</script>
+...
+    <PartialApp bind:hydrated page="staticpage">
+...
+```
+
 
 ## Example
 
