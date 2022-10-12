@@ -1,5 +1,7 @@
 # partial-hydration-sk
 
+[Live demo with adapter-static](https://partial-hydration.gradientdescent.de)
+
 Add partial hydration to your SvelteKit pages. It means that some parts of your page are only
 prerendered or rendered by the server. These parts are static, it won't change due to user interaction.
 This can be useful when:
@@ -179,3 +181,6 @@ Alternatively, you can set the 'trigger' prop to '"custom"'. Then you should als
 You can find an example app here:
 
 https://github.com/micha-lmxt/sveltekit-partial-hydration-template
+
+[Live demo with adapter-static](https://partial-hydration.gradientdescent.de)
+
