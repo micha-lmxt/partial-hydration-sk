@@ -22,7 +22,8 @@
     let root : Element;
     let childList:{el:Element,component:SvelteComponent} = [];
     let lazys : (()=>any)[] = [];
-
+    props = props?props:null;
+    page=page?page:null;
     onMount(()=>{
 
         let htmlLoaded = Promise.resolve(true);
