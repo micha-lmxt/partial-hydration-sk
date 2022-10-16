@@ -2,7 +2,8 @@
     import {Pages,Lazys} from './pages';
     import {setContext,getContext} from 'svelte'
     import {hydrateContext} from './context';
-    export let tag="div",id,page,props={},starts=[],hydrated:[];
+    export let tag="div",id,page,props={},starts=[],hydrated;
+    hydrated=true;
     const Page = Pages[page];
     const otherContext = getContext(hydrateContext);
     if (otherContext && Array.isArray(otherContext)){
