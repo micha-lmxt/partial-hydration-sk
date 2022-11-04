@@ -177,7 +177,7 @@ Alternatively, you can set the 'trigger' prop to '"custom"'. Then you should als
 
 ## Limitations
 
-Currently Svelte style tags work in static components, but only with a little ugly hack.
+Currently Svelte style tags work in static components. The styles are gathered and added inside a style tag within the body of the html file.
 
 ## Example
 
