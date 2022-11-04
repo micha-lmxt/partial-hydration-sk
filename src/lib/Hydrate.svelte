@@ -5,10 +5,10 @@
     import {browser} from '$app/environment';
     import StaticSlot from './ServerStaticSlot.svelte';
 
-    export let tag="x",
+    export let tag="div",
         props=undefined,
         component=undefined,
-        slotTag="x",
+        slotTag="div",
         key="",
         trigger="" as ""|"observer"|"custom";
     const comps : any[] = getContext(hydrateContext);
