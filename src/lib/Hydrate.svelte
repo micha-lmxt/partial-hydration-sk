@@ -1,9 +1,9 @@
 <script lang="ts">
     import {getContext, setContext} from 'svelte';
     import {hydrateContext} from './context';
-    import PartialApp from './partialApp';
     import {browser} from '$app/environment';
     import StaticSlot from './ServerStaticSlot.svelte';
+    import CssTagging from './cssTagging';
 
     export let tag="div",
         props=undefined,
@@ -32,11 +32,19 @@ data-props={props && !noHydration?JSON.stringify(props):undefined}
 data-key={key?key:undefined}
 data-trigger={trig}
 >
-    <svelte:component this={component} {...props||{}}>
-    {#if $$slots.default}
-    <StaticSlot tag={slotTag} context={comps} id={slotid}>
+    {#if browser}
+    <svelte:component this={component} {...(props||{})}>
         <slot/>
-    </StaticSlot>
-    {/if}
     </svelte:component>
+    {:else}
+        {#if $$slots.default}
+            <CssTagging {component} {props}>
+                <StaticSlot tag={slotTag} context={comps} id={slotid}>
+                    <slot/>
+                </StaticSlot>
+            </CssTagging>
+        {:else}
+            <CssTagging {component} {props}/>
+        {/if}
+    {/if}
 </svelte:element>

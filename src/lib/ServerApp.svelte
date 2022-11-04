@@ -11,6 +11,7 @@
         throw new Error("Try to launch nested PartialApp: " + id);
     }
     setContext(hydrateContext, starts.concat(Lazys));
+    
 </script>
 
 <svelte:element this={tag} {id} class="staticapp" >
