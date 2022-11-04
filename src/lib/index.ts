@@ -4,7 +4,7 @@ import type { SvelteComponentTyped } from 'svelte';
 export {default as PartialApp} from './partialApp';
 
 export {default as Hydrate} from './Hydrate.svelte';
-export {hydrate} from './hydrate'
+export {hydrate} from './hydrate';
 export {setDynamicComponents} from './pages';
 //export {addPage} from './pagesServer';
 // some helper components
