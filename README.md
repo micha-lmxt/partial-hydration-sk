@@ -25,7 +25,7 @@ Component:
 
 ```javascript
 import YourStaticComponent from '$lib/.../YourStaticComponent.svelte';
-import {addPage} from 'partial-hydration-sk';
+import {addPage} from 'partial-hydration-sk/server';
 
 export async function load(){
     addPage({page:YourStaticComponent,name:"YourStaticComponent");
