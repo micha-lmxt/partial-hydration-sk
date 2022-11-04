@@ -1,6 +1,6 @@
 import ClientApp from './ClientApp.svelte'
-import ServerApp from './ServerApp.svelte'
 import {browser} from '$app/environment';
+import ServerApp from './ServerApp.svelte'
 import type { SvelteComponent, SvelteComponentTyped } from 'svelte';
 export interface PartialHydrationProps{
     /**
@@ -38,6 +38,8 @@ export interface PartialHydrationProps{
 
  */
 export type PartialHydration = typeof SvelteComponentTyped<PartialHydrationProps,{},{}>
+
+
 
 const App = (browser ? 
     ClientApp :

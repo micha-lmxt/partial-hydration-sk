@@ -5,8 +5,8 @@ export {default as PartialApp} from './partialApp';
 
 export {default as Hydrate} from './Hydrate.svelte';
 export {hydrate} from './hydrate'
-export {addPage, setDynamicComponents} from './pages';
-
+export {setDynamicComponents} from './pages';
+//export {addPage} from './pagesServer';
 // some helper components
 /**
  * Portal like component. Slot content is hydrated into the prop 
