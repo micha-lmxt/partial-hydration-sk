@@ -9,6 +9,12 @@ This can be useful when:
  - large parts of your app are static and only few parts need javascript
  - rendering is expensive and can be performed only at server, eg. processing markdown files to html  
 
+> ⚠️: this library steps outside the path of
+user-land APIs at a few occasions. It may
+be more likely to break in future versions
+of Svelte if internals change. You've been warned,
+note have fun!
+
 ## Installation
 
 
